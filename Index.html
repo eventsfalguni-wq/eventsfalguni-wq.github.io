@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroVani - Free Kundli, Horoscope & Astrology Consultation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" onclick="showSection('home')" class="text-2xl font-bold flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-om text-amber-400"></i> AstroVani
+            </a>
+            <div class="hidden md:flex space-x-6 font-medium">
+                <button onclick="showSection('home')" id="nav-home" class="text-amber-400 hover:text-amber-300 transition">Home</button>
+                <button onclick="showSection('kundli')" id="nav-kundli" class="hover:text-amber-300 transition">Free Kundli & Matching</button>
+                <button onclick="showSection('horoscope')" id="nav-horoscope" class="hover:text-amber-300 transition">Horoscope</button>
+                <button onclick="showSection('astrologers')" id="nav-astrologers" class="hover:text-amber-300 transition">Talk to Astrologer</button>
+            </div>
+            <div>
+                <button onclick="showSection('astrologers')" class="bg-amber-500 hover:bg-amber-600 text-indigo-950 font-bold px-4 py-2 rounded-full shadow transition">
+                    <i class="fa-solid fa-phone"></i> Consult Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU / BOTTOM NAV FOR SMALL SCREENS -->
+    <div class="md:hidden bg-indigo-950 text-white flex justify-around py-3 border-t border-indigo-900 text-xs fixed bottom-0 w-full z-50">
+        <button onclick="showSection('home')" class="flex flex-col items-center"><i class="fa-solid fa-house text-lg"></i>Home</button>
+        <button onclick="showSection('kundli')" class="flex flex-col items-center"><i class="fa-solid fa-book-open text-lg"></i>Kundli</button>
+        <button onclick="showSection('horoscope')" class="flex flex-col items-center"><i class="fa-solid fa-star text-lg"></i>Horoscope</button>
+        <button onclick="showSection('astrologers')" class="flex flex-col items-center"><i class="fa-solid fa-phone text-lg"></i>Astrologers</button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="pb-16 md:pb-0">
+
+        <!-- 1. HOME SECTION -->
+        <section id="section-home" class="page-section">
+            <!-- Hero Header -->
+            <header class="bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900 text-white py-16 text-center px-4">
+                <div class="max-w-3xl mx-auto">
+                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">Discover Your Future with <span class="text-amber-400">Vedic Astrology</span></h1>
+                    <p class="text-base md:text-lg text-gray-300 mb-8">Get accurate Free Kundli, Horoscope predictions, and instant consultation with expert astrologers.</p>
+                    
+                    <!-- Quick Kundli Form Card -->
+                    <div class="bg-white text-gray-800 p-6 rounded-xl shadow-xl max-w-xl mx-auto text-left">
+                        <h3 class="text-lg font-bold mb-4 text-indigo-900"><i class="fa-solid fa-star text-amber-500"></i> Instant Free Kundli Generator</h3>
+                        <form onsubmit="handleQuickKundli(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Full Name</label>
+                                <input type="text" id="qh-name" placeholder="Enter your name" required class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Date of Birth</label>
+                                    <input type="date" required class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Time of Birth</label>
+                                    <input type="time" required class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Birth Place</label>
+                                <input type="text" placeholder="City, State, Country" required class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-indigo-950 font-bold py-3 rounded-lg transition shadow-md text-sm">
+                                Generate Kundli Free
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Services Grid -->
+            <section class="py-16 container mx-auto px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-indigo-900 mb-12">Our Popular Astrology Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500 text-center">
+                        <div class="text-4xl text-indigo-900 mb-4"><i class="fa-solid fa-book-open"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Free Janam Kundli</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Detailed astrological charts, planetary positions, Dosh analysis, and Vimshottari Dasa.</p>
+                        <button onclick="showSection('kundli')" class="text-indigo-900 font-semibold hover:underline">Read More &rarr;</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500 text-center">
+                        <div class="text-4xl text-indigo-900 mb-4"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Kundli Matching (Gun Milan)</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Check marriage compatibility, Ashta Koota gun milan, and manglik dosha matching.</p>
+                        <button onclick="showSection('kundli'); switchKundliTab('matching');" class="text-indigo-900 font-semibold hover:underline">Check Matching &rarr;</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500 text-center">
+                        <div class="text-4xl text-indigo-900 mb-4"><i class="fa-solid fa-comments"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Talk to Astrologer</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Connect directly with India's best verified Vedic astrologers, tarot readers, and numerologists.</p>
+                        <button onclick="showSection('astrologers')" class="text-indigo-900 font-semibold hover:underline">Consult Now &rarr;</button>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <!-- 2. KUNDLI & MATCHING SECTION -->
+        <section id="section-kundli" class="page-section hidden py-10">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl font-bold text-indigo-900 text-center mb-6">Free Kundli & Horoscope Matching</h1>
+
+                <!-- Tabs Switcher -->
+                <div class="flex justify-center mb-8">
+                    <button onclick="switchKundliTab('kundli')" id="k-tab-btn" class="bg-indigo-900 text-amber-400 font-bold px-6 py-2 rounded-l-lg shadow text-sm">Janam Kundli</button>
+                    <button onclick="switchKundliTab('matching')" id="m-tab-btn" class="bg-gray-200 text-gray-700 font-bold px-6 py-2 rounded-r-lg shadow text-sm">Kundli Matching</button>
+                </div>
+
+                <!-- Janam Kundli Form Sub-section -->
+                <div id="sub-kundli" class="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold text-indigo-900 mb-6">Enter Birth Details for Janam Kundli</h2>
+                    <form onsubmit="generateKundliResult(event)" class="space-y-4">
+                        <div>
+                            <label class="block font-semibold mb-1 text-sm">Full Name</label>
+                            <input type="text" id="k-name" required class="w-full border rounded-lg px-4 py-2 text-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold mb-1 text-sm">Date of Birth</label>
+                                <input type="date" required class="w-full border rounded-lg px-4 py-2 text-sm">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1 text-sm">Time of Birth</label>
+                                <input type="time" required class="w-full border rounded-lg px-4 py-2 text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1 text-sm">Birth Place</label>
+                            <input type="text" required class="w-full border rounded-lg px-4 py-2 text-sm" placeholder="e.g., Varanasi, Uttar Pradesh">
+                        </div>
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-indigo-950 font-bold py-3 rounded-lg shadow text-sm">
+                            Generate Kundli Chart
+                        </button>
+                    </form>
+                    
+                    <!-- Result Box -->
+                    <div id="kundli-result-box" class="mt-8 hidden p-6 bg-amber-100 rounded-lg border border-amber-300">
+                        <h3 class="text-lg font-bold text-indigo-900 mb-2">Kundli Generated Successfully for <span id="res-name"></span>!</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Lagna Chart and planetary positions are ready.</p>
+                        <div class="grid grid-cols-2 gap-4 bg-white p-4 rounded shadow-inner text-sm">
+                            <div><strong>Ascendant (Lagn):</strong> Leo (Simha)</div>
+                            <div><strong>Moon Sign:</strong> Scorpio (Vrishchik)</div>
+                            <div><strong>Nakshatra:</strong> Anuradha</div>
+                            <div><strong>Mahadasha:</strong> Jupiter (Guru)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kundli Matching Sub-section -->
+                <div id="sub-matching" class="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-md hidden">
+                    <h2 class="text-xl font-bold text-indigo-900 mb-6">Gun Milan (Horoscope Matching for Marriage)</h2>
+                    <form onsubmit="generateMatchingResult(event)" class="space-y-6">
+                        <div class="border p-4 rounded-lg bg-gray-50">
+                            <h3 class="font-bold text-indigo-900 mb-3 text-sm">Boy's Details</h3>
+                            <input type="text" placeholder="Boy's Name" required class="w-full border rounded-lg px-3 py-2 mb-2 text-sm">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="date" required class="border rounded-lg px-3 py-2 text-sm">
+                                <input type="time" required class="border rounded-lg px-3 py-2 text-sm">
+                            </div>
+                        </div>
+                        <div class="border p-4 rounded-lg bg-gray-50">
+                            <h3 class="font-bold text-indigo-900 mb-3 text-sm">Girl's Details</h3>
+                            <input type="text" placeholder="Girl's Name" required class="w-full border rounded-lg px-3 py-2 mb-2 text-sm">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="date" required class="border rounded-lg px-3 py-2 text-sm">
+                                <input type="time" required class="border rounded-lg px-3 py-2 text-sm">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-indigo-950 font-bold py-3 rounded-lg shadow text-sm">
+                            Match Kundli (Gun Milan)
+                        </button>
+                    </form>
+
+                    <div id="matching-result-box" class="mt-8 hidden p-6 bg-green-100 rounded-lg border border-green-300 text-center">
+                        <h3 class="text-2xl font-bold text-green-900 mb-2">Total Score: 27 / 36</h3>
+                        <p class="text-green-800 font-medium text-sm">Very Good Compatibility! Manglik Dosh is neutralised.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 3. HOROSCOPE SECTION -->
+        <section id="section-horoscope" class="page-section hidden py-10">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl font-bold text-indigo-900 text-center mb-2">Daily Zodiac Horoscope</h1>
+                <p class="text-center text-gray-600 mb-10 text-sm">Select your zodiac sign to read today's astrological predictions.</p>
+
+                <!-- Zodiac Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div onclick="openHoroscopeCard('Aries', 'Mesh')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-fire"></i></div>
+                        <h3 class="font-bold text-indigo-900">Aries</h3>
+                        <p class="text-xs text-gray-500">Mar 21 - Apr 19</p>
+                    </div>
+                    <div onclick="openHoroscopeCard('Taurus', 'Vrishabh')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-seedling"></i></div>
+                        <h3 class="font-bold text-indigo-900">Taurus</h3>
+                        <p class="text-xs text-gray-500">Apr 20 - May 20</p>
+                    </div>
+                    <div onclick="openHoroscopeCard('Gemini', 'Mithun')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-wind"></i></div>
+                        <h3 class="font-bold text-indigo-900">Gemini</h3>
+                        <p class="text-xs text-gray-500">May 21 - Jun 20</p>
+                    </div>
+                    <div onclick="openHoroscopeCard('Cancer', 'Kark')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-water"></i></div>
+                        <h3 class="font-bold text-indigo-900">Cancer</h3>
+                        <p class="text-xs text-gray-500">Jun 21 - Jul 22</p>
+                    </div>
+                    <div onclick="openHoroscopeCard('Leo', 'Simha')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-sun"></i></div>
+                        <h3 class="font-bold text-indigo-900">Leo</h3>
+                        <p class="text-xs text-gray-500">Jul 23 - Aug 22</p>
+                    </div>
+                    <div onclick="openHoroscopeCard('Virgo', 'Kanya')" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer text-center border hover:border-amber-500">
+                        <div class="text-3xl text-amber-500 mb-2"><i class="fa-solid fa-earth-americas"></i></div>
+                        <h3 class="font-bold text-indigo-900">Virgo</h3>
+                        <p class="text-xs text-gray-500">Aug 23 - Sep 22</p>
+                    </div>
+                </div>
+
+                <!-- Prediction Details Box -->
+                <div id="horoscope-detail-box" class="mt-12 bg-white p-8 rounded-xl shadow-md hidden max-w-3xl mx-auto">
+                    <h2 id="h-title" class="text-xl font-bold text-indigo-900 mb-4"></h2>
+                    <div class="space-y-4 text-gray-700 text-sm">
+                        <p><strong>Overview:</strong> Today brings positive energy for career growth and financial stability. Keep your focus sharp on important goals.</p>
+                        <p><strong>Love & Relationships:</strong> Harmony will prevail in family matters. A surprise from your partner is likely.</p>
+                        <p><strong>Health:</strong> Good health is indicated, maintain regular workouts.</p>
+                        <p class="text-amber-600 font-semibold">Lucky Color: Saffron | Lucky Number: 7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. TALK TO ASTROLOGER SECTION -->
+        <section id="section-astrologers" class="page-section hidden py-10">
+            <div class="container mx-auto px-6">
+                <h1 class="text-3xl font-bold text-indigo-900 text-center mb-2">Talk to Expert Astrologers</h1>
+                <p class="text-center text-gray-600 mb-10 text-sm">Get guidance on career, love, marriage, and health from verified experts.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Astrologer 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border hover:border-indigo-500 transition">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Astrologer" class="w-16 h-16 rounded-full object-cover border-2 border-amber-500">
+                            <div>
+                                <h3 class="font-bold text-lg text-indigo-900">Acharya Sharma</h3>
+                                <p class="text-xs text-gray-500">Vedic Astrology, Vastu</p>
+                                <p class="text-xs text-amber-600 font-semibold"><i class="fa-solid fa-star"></i> 4.9 (1,240 Orders)</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Experience: 15 Years | Lang: Hindi, English</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-indigo-900 text-sm">₹25 / min</span>
+                            <div clas
